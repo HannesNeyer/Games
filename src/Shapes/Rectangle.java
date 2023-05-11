@@ -1,57 +1,25 @@
 package Shapes;
 
-import org.newdawn.slick.*;
-import org.newdawn.slick.tests.AnimationTest;
-
-public class Rectangle extends BasicGame {
-
+import org.newdawn.slick.Graphics;
+public class Rectangle {
     private float x;
     private float y;
     private float speed;
+    private enum Direction{Right,Down,Left,Up};
 
-    public Rectangle(String title) {
-        super(title);
+    public Rectangle(int x, int y, float speed) {
+        this.x = x;
+        this.y = y;
+        this.speed = speed;
     }
 
-    @Override
-    public void init(GameContainer gameContainer) throws SlickException {
-        this.x = 100;
-        this.y = 100;
-        this.speed = 50.0f;
+    public void render(Graphics graphics){
+        graphics.drawRect(this.x,this.y,10,5);
     }
-
-    @Override
-    public void update(GameContainer gameContainer, int delta) throws SlickException {
-
-        if(this. x <= 300){
-            x++;
-        }
-        else if (this.y <= 300)
-        {
-            y++;
-        }
-        else if (this.x >= 100)
-        {
-            x--;
-        }
-        else {
-            y--;
-        }
-    }
-
-    @Override
-    public void render(GameContainer gameContainer, Graphics graphics) throws SlickException {
-        graphics.drawRect(this.x,this.y,100, 100);
-        graphics.drawString("Hello World", 100, 100);
-    }
-
-    public static void main(String[] argv) {
-        try {
-            AppGameContainer container = new AppGameContainer(new Rectangle("Rectangles"));
-            container.setDisplayMode(800,600,false);
-            container.start();
-        } catch (SlickException e) {
-            e.printStackTrace();
+    public void update(int delta){
+        this.x += (float)delta/this.speed;
+        if(this.x >= 600){
+            this.x = 0;
         }
     }
 }
