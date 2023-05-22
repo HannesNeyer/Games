@@ -4,7 +4,7 @@ import org.newdawn.slick.Graphics;
 
 import java.util.Random;
 
-public class Circles {
+public class Circles implements Actor{
     private float x;
     private float y;
     private float speed;

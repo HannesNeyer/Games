@@ -1,7 +1,7 @@
 package Shapes;
 
 import org.newdawn.slick.Graphics;
-public class Rectangle {
+public class Rectangle implements Actor{
     private float x;
     private float y;
     private float speed;
