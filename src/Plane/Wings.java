@@ -7,7 +7,8 @@ import java.util.Scanner;
 
 public class Wings {
     private int flapsSetting = 0;
-    private double hydrolicLevels = 200.00;
+    private String wingName = "";
+    private double hydrolicLevels = 30;
     private double length;
     private double width;
     private double heigth;
@@ -17,11 +18,12 @@ public class Wings {
     Scanner scannerChoseFlaps;
     Scanner ActivateDeIce;
 
-    public Wings(int flapsSetting, double length, double width, double heigth) {
+    public Wings(int flapsSetting, double length, double width, double heigth, String wingName) {
         this.flapsSetting = flapsSetting;
         this.length = length;
         this.width = width;
         this.heigth = heigth;
+        this.wingName = wingName;
         PossibleFlapSettings = new ArrayList<Integer>();
         scannerChoseFlaps = new Scanner(System.in);
         ActivateDeIce = new Scanner(System.in);
@@ -29,18 +31,19 @@ public class Wings {
 
     void changeFlapsSetting(){
         int chosenFlaps = 0;
-        int ArrayFill = 0;
+        int chosenAnswer = 0;
 
-        for(int i = 0; i < 9; i++){
-            PossibleFlapSettings.add(ArrayFill);
-            ArrayFill =+ 5;
+        for(int i = 0; i < 45; i = i+5){
+            PossibleFlapSettings.add(i);
         }
 
-        System.out.println("Geben Sie eine der folgenden Einstellungen ein. (Nur diese werden angenommen)" + PossibleFlapSettings.toString());
-        for(int i = 0; i < 9; i++) {
-            if (scannerChoseFlaps.nextInt() == PossibleFlapSettings.get(i))
-                chosenFlaps = scannerChoseFlaps.nextInt();
-                System.out.println("New flap setting is: " + chosenFlaps);
+        System.out.println("Geben Sie eine der folgenden Einstellungen ein. (Nur diese werden angenommen)" + PossibleFlapSettings.toString() + wingName);
+        chosenAnswer = scannerChoseFlaps.nextInt();
+        for(int j = 0; j < 9; j++) {
+            if (chosenAnswer == PossibleFlapSettings.get(j)){
+                chosenFlaps = PossibleFlapSettings.get(j);
+                System.out.println("New flap setting is: " + chosenFlaps +"\n");
+            }
         }
     }
 

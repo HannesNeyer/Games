@@ -13,13 +13,11 @@ public class FuelTank {
     }
 
     void dropFuell(){
-        this.currentFuelAmount -= 5;
-        this.currentFuelWeight -= 5;
-    }
-
-    void FuelUsage(){
-        this.currentFuelAmount -= 5;
-        this.currentFuelWeight -= 5;
+        for(int i = 0; i < 50; i++){
+            this.currentFuelAmount -= 5;
+            this.currentFuelWeight -= 5;
+        }
+        System.out.println("Fuel Drop complete");
     }
 
     public double getCurrentFuelAmount() {

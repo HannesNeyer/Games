@@ -11,12 +11,15 @@ public class Plane {
     private int capacity;
     private String model;
     private String manufacturer;
-    protected Engine engine;
-    protected Wings wings;
-    protected FuelTank fuelTank;
+    protected Engine e1;
+    protected Engine e2;
+    protected Wings wl;
+    protected Wings wr;
+    protected FuelTank fl;
+    protected FuelTank fr;
     protected Gear gear;
 
-    public Plane(double length, double witdth, double height, double weight, int capacity, String model, String manufacturer, Engine engine1, Engine engine2, Wings wings1, Wings wings2, FuelTank fuelTank1, FuelTank fuelTank2, Gear gear) {
+    public Plane(double length, double witdth, double height, double weight, int capacity, String model, String manufacturer, Engine e1, Engine e2, Wings wl, Wings wr, FuelTank fl, FuelTank fr, Gear gear) {
         this.length = length;
         this.width = witdth;
         this.height = height;
@@ -24,34 +27,48 @@ public class Plane {
         this.capacity = capacity;
         this.model = model;
         this.manufacturer = manufacturer;
-        this.engine = engine1;
-        this.fuelTank = fuelTank1;
+        this.e1 = e1;
+        this.e2 = e2;
+        this.fl = fl;
+        this.fr = fr;
         this.gear = gear;
+        this.wl = wl;
+        this.wr = wr;
     }
 
     public void TakeOff(){
-        this.wings.changeFlapsSetting();
-        this.engine.changeEngineStatus();
-        this.engine.changeThrust();
-        if(this.wings.checkAirflow() >= 160)
-        {altitude += 1;}
-        if(altitude > 200){
-            this.gear.GearSetting();
-        }
+        this.wl.changeFlapsSetting();
+        this.wr.setFlapsSetting(this.wl.getFlapsSetting());
+        this.e1.changeEngineStatus();
+        this.e2.changeEngineStatus();
+        this.e1.changeThrust();
+        this.e2.changeThrust();
+        if(this.wl.checkAirflow() >= 160 && this.wr.checkAirflow() >= 160)
+        {altitude = 200;}
+        this.gear.GearSetting();
+
     }
 
     public void LevelingOff(){
-        this.wings.deIceWings();
-        this.engine.TemperatureTooHigh();
-        this.fuelTank.dropFuell();
-        this.wings.checkHydrolicFluid();
-        this.wings.checkAirflow();
+        this.wl.deIceWings();
+        this.wr.deIceWings();
+        this.e1.TemperatureTooHigh();
+        this.e2.TemperatureTooHigh();
+        this.fl.dropFuell();
+        this.fr.dropFuell();
+        this.wl.checkHydrolicFluid();
+        this.wr.checkHydrolicFluid();
+        this.wl.checkAirflow();
+        this.wr.checkAirflow();
     }
 
     public void Land(){
-        this.wings.changeFlapsSetting();
-        this.engine.changeThrust();
-        this.wings.changeFlapsSetting();
+        this.wl.changeFlapsSetting();
+        this.wr.changeFlapsSetting();
+        this.e1.changeThrust();
+        this.e2.changeThrust();
+        this.wl.changeFlapsSetting();
+        this.wr.changeFlapsSetting();
         this.gear.GearSetting();
         if(altitude >= 0)
         {altitude -= 1;}
