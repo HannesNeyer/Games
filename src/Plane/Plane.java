@@ -51,7 +51,7 @@ public class Plane {
 
     public void LevelingOff(){
         this.wl.deIceWings();
-        this.wr.deIceWings();
+        this.wr.setHeat(this.wl.getHeat());
         this.e1.TemperatureTooHigh();
         this.e2.TemperatureTooHigh();
         this.fl.dropFuell();
@@ -64,14 +64,13 @@ public class Plane {
 
     public void Land(){
         this.wl.changeFlapsSetting();
-        this.wr.changeFlapsSetting();
+        this.wr.setFlapsSetting(this.wl.getFlapsSetting());
         this.e1.changeThrust();
         this.e2.changeThrust();
         this.wl.changeFlapsSetting();
-        this.wr.changeFlapsSetting();
+        this.wr.setFlapsSetting(this.wl.getFlapsSetting());
         this.gear.GearSetting();
-        if(altitude >= 0)
-        {altitude -= 1;}
+
     }
 
     public double getLength() {

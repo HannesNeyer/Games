@@ -7,7 +7,6 @@ import java.util.Scanner;
 
 public class Wings {
     private int flapsSetting = 0;
-    private String wingName = "";
     private double hydrolicLevels = 30;
     private double length;
     private double width;
@@ -18,12 +17,11 @@ public class Wings {
     Scanner scannerChoseFlaps;
     Scanner ActivateDeIce;
 
-    public Wings(int flapsSetting, double length, double width, double heigth, String wingName) {
+    public Wings(int flapsSetting, double length, double width, double heigth) {
         this.flapsSetting = flapsSetting;
         this.length = length;
         this.width = width;
         this.heigth = heigth;
-        this.wingName = wingName;
         PossibleFlapSettings = new ArrayList<Integer>();
         scannerChoseFlaps = new Scanner(System.in);
         ActivateDeIce = new Scanner(System.in);
@@ -37,7 +35,7 @@ public class Wings {
             PossibleFlapSettings.add(i);
         }
 
-        System.out.println("Geben Sie eine der folgenden Einstellungen ein. (Nur diese werden angenommen)" + PossibleFlapSettings.toString() + wingName);
+        System.out.println("Geben Sie eine der folgenden Einstellungen ein. (Nur diese werden angenommen)" + PossibleFlapSettings.toString());
         chosenAnswer = scannerChoseFlaps.nextInt();
         for(int j = 0; j < 9; j++) {
             if (chosenAnswer == PossibleFlapSettings.get(j)){
@@ -53,13 +51,14 @@ public class Wings {
         AnswerDeIce = ActivateDeIce.nextInt();
         if(AnswerDeIce == 1) {
             this.heat = 20;
+            System.out.println("De Ice activated");
         }
     }
 
     void checkHydrolicFluid(){
         System.out.println(hydrolicLevels);
         if(this.hydrolicLevels < 50){
-            System.out.println("Hydrolic fluid is dangerously low. Land as soon as possible");
+            System.out.println("Hydrolic fluid is dangerously low." + this.hydrolicLevels + "Land as soon as possible");
         }
     }
 
@@ -68,7 +67,7 @@ public class Wings {
         if(this.airFlow < 200){
             System.out.println("Stall warning!!!");
         }
-        return this.airFlow;
+        return airFlow;
     }
 
     public int getFlapsSetting() {

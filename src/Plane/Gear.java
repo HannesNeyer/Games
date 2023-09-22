@@ -17,9 +17,11 @@ public class Gear {
         choosenGearSetting = scannerChoseGearSetting.nextInt();
         if(choosenGearSetting == 1){
             this.actualSetting = gearSetting.Down;
+            System.out.println("Gear setting down");
         }
         else {
             this.actualSetting = gearSetting.Up;
+            System.out.println("Gear setting up");
         }
     }
 
